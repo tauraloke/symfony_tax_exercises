@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use App\Repository\VatinMaskRepository;
+use App\Repository\VatinRepository;
 
 class StartsFromCountryCodeValidator extends ConstraintValidator
 {
@@ -24,7 +24,7 @@ class StartsFromCountryCodeValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, 'string');
         }
 
-        $country_codes = join(VatinMaskRepository::getCodes(), '|');
+        $country_codes = join(VatinRepository::getCodes(), '|');
         if (!preg_match("/^({$country_codes})[0-9]+$/", $value, $matches)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', $value)

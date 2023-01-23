@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-class VatinMaskRepository
+class VatinRepository
 {
     private const data = [  # just a stub without a real database
         'DE' => [

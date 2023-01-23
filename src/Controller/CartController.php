@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Cart;
 use App\Form\Type\CartType;
 use App\Repository\ProductRepository;
+use App\Repository\VatinRepository;
+use App\Util\VatinAnalyzer;
 
 class CartController extends AbstractController
 {
@@ -34,8 +36,10 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $cart = $form->getData();
-            $goods = $cart->getCart();
+            $data = $form->getData();
+            $goods = $data->getCart();
+
+            $vatin_medatada = (new VatinAnalyzer($data->getVatin()))->getMetadata();
 
             return $this->render('products/total.html.twig', [
                 'form' => $form,
@@ -43,7 +47,7 @@ class CartController extends AbstractController
             ]);
         }
 
-        
+
 
         return $this->render('products/cart.html.twig', [
             'form' => $form->createView(),

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Total cost
+{% endblock %}
+
+{% block body %}
+    <h1>Your order</h1>
+    {% for good in goods %}
+        <div>
+            {{ good.getTitle() }} - {{ good.getCurrency() }}{{ good.getPrice() }}
+        </div>
+    {% endfor %}
+{% endblock %}

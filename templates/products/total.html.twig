@@ -6,9 +6,18 @@
 
 {% block body %}
     <h1>Your order</h1>
+    Your country is detected by the TAX code as <b>{{ country }}</b>. Tax rate is {{ tax_rate }}%.
+    <ul>
     {% for good in goods %}
-        <div>
-            {{ good.getTitle() }} - {{ good.getCurrency() }}{{ good.getPrice() }}
-        </div>
+        <li>
+            {{ good.getTitle() }}:
+            raw cost {{ good.getCurrency() }}{{ good.getPrice() }}
+            + VAT {{ good.getCurrency() }}{{ good.getPrice() * tax_rate / 100 }}
+        </li>
     {% endfor %}
+    </ul>
+    <hr />
+    <div>Total: {{ goods[0].getCurrency()}}{{ total_with_vat }}</div>
+    </div>VAT: {{ goods[0].getCurrency()}}{{ vat_of_total }}</div>
+
 {% endblock %}

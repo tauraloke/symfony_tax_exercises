@@ -19,7 +19,7 @@ class VatinRepository
         ],
         'GR' => [
             'code' => 'GR',
-            'country' => 'Greec',
+            'country' => 'Greece',
             'tail_length' => 9,
             'tax_rate' => 24
         ],
